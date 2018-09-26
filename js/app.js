@@ -1,6 +1,17 @@
 
-
+// const mySound = new sound("../media/bg/09 Come and Find Me - B mix.mp3");
+var mySound;
 $(function(){
+    // mySound.play();
+    // mySound = new Sound("");
+
+    var mySound = new Audio('../media/bg/02 Underclocked (underunderclocked mix).mp3');
+    // mySound.volume(10);
+    // mySound.play();
+    mySound.volume = 0.5;
+    
+    
+
     const alienBossGreenImage = document.getElementById("alien-boss-green-sprite");
     const shipImage = document.getElementById("ship");
     const ship = new Ship(shipImage,stageWidth/2,stageHeight,40,40);

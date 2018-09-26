@@ -1,3 +1,23 @@
+body {
+    /* position: relative; */
+    margin: 0px;
+    padding: 0px;
+}
 #screen {
     background: #000;
+    /* position: relative;; */
+    /* border: 1px solid red; */
+    /* width: 100%; */
+    /* height: auto; */
+    margin: 0;
+    padding: 0px;
+}
+
+#container {
+    /* width: 500px; */
+    /* margin:0px !important; */
+    /* padding: 0px !important; */
+}
+#assets {
+    display: none;
 }

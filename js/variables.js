@@ -2,12 +2,15 @@
 const c = document.getElementById("screen");
 const ctx = c.getContext("2d");
 
+
 const stageWidth = c.width;
 const stageHeight = c.height;
 
 const borderOffset = 10;
-
 let speed = 5;
+
+
+
 
 // RequestAnimateFreame FPS
 
@@ -20,3 +23,9 @@ let lastTime = 0;
 let collectionShoots = [];
 let collectionAliens = [];
 let collection = [];
+
+/**
+ * Element's
+*/
+
+

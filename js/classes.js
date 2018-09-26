@@ -116,6 +116,7 @@ class Alien extends Base {
                 this.sprite = 1;
             else
                 this.sprite = 0;
+            this.shoot();
         }
 
         if(this.transitionTime < 300){
@@ -139,7 +140,7 @@ class Alien extends Base {
                     this.j ++;
                 }
             }
-        this.shoot(); 
+        // this.shoot(); 
 
         }
         
@@ -155,8 +156,8 @@ class Alien extends Base {
     }
 
     shoot() {
-        const shootImage = document.getElementById("shoot-laser");
-        const shoot = new Shoot(shootImage,this.x +25,this.y+25,10,29,"down",0.9);
+        const shootImage = document.getElementById("shoot-misile");
+        const shoot = new Shoot(shootImage,this.x +25,this.y+25,7*5,12*5,"down",0.9);
         collectionShoots.push(shoot);
     }
 }
@@ -173,7 +174,7 @@ class Shoot extends Base {
         this.direction = direction;
     }
     draw(){
-        if(this.image !== null) 
+        // if(this.image !== null) 
             ctx.drawImage(this.image,this.x,this.y,this.width,this.height);
     }
 

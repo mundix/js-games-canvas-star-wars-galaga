@@ -7,13 +7,17 @@ $(function(){
 
     var mySound = new Audio('../media/bg/02 Underclocked (underunderclocked mix).mp3');
     // mySound.volume(10);
-    // mySound.play();`
+    // mySound.play();
     mySound.volume = 0.5;
 
     const alienBossGreenImage = document.getElementById("alien-boss-green-sprite");
     const shipImage = document.getElementById("ship");
 
     const ship = new Ship(shipImage,stageWidth/2,stageHeight,40,40);
+
+    // const shootImage = document.getElementById("shoot-misile");
+    //     const shoot = new Shoot(shootImage,ship.x +25,ship.y+25,7*5,12*5,"up");
+    //     collection.push(shoot);
     
 
     ship.x = stageWidth/2 - ship.width;

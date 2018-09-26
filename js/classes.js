@@ -47,8 +47,6 @@ class Ship extends Base {
             
     }
     shoot() {
-        // const shoot = new Shoot(this.shootImage,this.x,this.y,this.shootImage.width,this.shootImage.height);
-        // collectionShoots.push(shoot);
         const shootImage = document.getElementById("shoot-laser");
         const shoot = new Shoot(shootImage,this.x+(this.width/2)-4,this.y,10,29);
         collectionShoots.push(shoot);
@@ -141,6 +139,8 @@ class Alien extends Base {
                     this.j ++;
                 }
             }
+        this.shoot(); 
+
         }
         
         this.y -= this.dy;
@@ -153,23 +153,28 @@ class Alien extends Base {
             
             
     }
+
+    shoot() {
+        const shootImage = document.getElementById("shoot-laser");
+        const shoot = new Shoot(shootImage,this.x +25,this.y+25,10,29,"down",0.9);
+        collectionShoots.push(shoot);
+    }
 }
 
 class Shoot extends Base {
-    constructor(image = null, x = 0,y = 0,width,height) {
+    constructor(image = null, x = 0,y = 0,width,height,direction = "up",speedPercent = 0.5) {
         super();
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.image = image;
-        this.dy = this.dx = speed * 0.5;
-        // this.shootImage = document.getElementById("shoot-laser");
+        this.dy = this.dx = speed * speedPercent;
+        this.direction = direction;
     }
     draw(){
         if(this.image !== null) 
             ctx.drawImage(this.image,this.x,this.y,this.width,this.height);
-        
     }
 
     collision()
@@ -179,12 +184,10 @@ class Shoot extends Base {
         return false;
     }
 
-    move(direction = "up") {
-        if(direction == "up")
+    move() {
+        if(this.direction == "up")
             this.y -= this.dy;
-        else if(direction == "down")
+        else if(this.direction == "down")
             this.y += this.dy;
-        
-            
     }
 }

@@ -13,6 +13,7 @@ class Ship extends Base {
         this.height = height;
         this.image = image;
         this.dy = this.dx = speed * 0.5;
+        // this.shootImage = document.getElementById("shoot-laser");
          
     }
     draw(){
@@ -35,6 +36,7 @@ class Ship extends Base {
     }
 
     move() {
+        
         // this.y -= this.dy;
         // this.x += this.dx;
 
@@ -44,6 +46,13 @@ class Ship extends Base {
         //     this.dx = -this.dx;
             
     }
+    shoot() {
+        // const shoot = new Shoot(this.shootImage,this.x,this.y,this.shootImage.width,this.shootImage.height);
+        // collectionShoots.push(shoot);
+        const shootImage = document.getElementById("shoot-laser");
+        const shoot = new Shoot(shootImage,this.x+(this.width/2)-4,this.y,10,29);
+        collectionShoots.push(shoot);
+    }
 }
 
 class Alien extends Base {
@@ -51,7 +60,6 @@ class Alien extends Base {
         super();
         const  randomNumber = Math.random();
         this.transition = (randomNumber>=5)?5:randomNumber; //transition speed
-        console.log(this.transition,randomNumber);
         this.x = x;
         this.y = y;
         this.width = width;
@@ -101,7 +109,6 @@ class Alien extends Base {
     }
 
     move(time = 0) {
-
         if(this.counter < 30)
         {
             this.counter ++;
@@ -134,7 +141,6 @@ class Alien extends Base {
                     this.j ++;
                 }
             }
-
         }
         
         this.y -= this.dy;
@@ -150,47 +156,35 @@ class Alien extends Base {
 }
 
 class Shoot extends Base {
-    constructor(x,y,radius) {
+    constructor(image = null, x = 0,y = 0,width,height) {
         super();
-        this.size = radius || 25;
         this.x = x;
         this.y = y;
-        this.bgColor = "#fff";
-        
+        this.width = width;
+        this.height = height;
+        this.image = image;
+        this.dy = this.dx = speed * 0.5;
+        // this.shootImage = document.getElementById("shoot-laser");
     }
     draw(){
-        ctx.beginPath();
-        ctx.arc(
-            this.x,
-            this.y,
-            this.size,this.size,this.size*Math.PI);
-            ctx.fillStyle = this.bgColor;
-            ctx.fill();
-            ctx.stroke();
+        if(this.image !== null) 
+            ctx.drawImage(this.image,this.x,this.y,this.width,this.height);
+        
     }
 
-    isVerticalcollision()
+    collision()
     {
         if( (this.y <= (0 + this.height) || (this.y >= innerHeight-this.height)) ) 
             return true;
         return false;
     }
-    isHorizontalCollision()
-    {
-        if(  (this.x <= 0 +this.width || this.x >= (innerWidth-this.width)) ) 
-            return true;
-        return false;
-    }
 
-    move() {
+    move(direction = "up") {
+        if(direction == "up")
+            this.y -= this.dy;
+        else if(direction == "down")
+            this.y += this.dy;
         
-        this.y -= this.dy;
-        this.x += this.dx;
-
-        if(this.isVerticalcollision())
-            this.dy = -this.dy;
-        if(this.isHorizontalCollision())
-            this.dx = -this.dx;
             
     }
 }

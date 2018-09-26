@@ -6,32 +6,20 @@ function draw(){
         obj.draw();
         obj.move();
     });
+    collectionShoots.forEach((obj,key) => {
+        // obj.shoot();
+        obj.draw(); 
+        obj.move();
+        if(obj.collision()){
+            collectionShoots[key] = null;
+            delete collectionShoots[key];
+        }
+
+    });
     // ship.draw();
     // ship.move();
 }
-// function frame(time = 0){
 
-//     const deltaTime = time - lastTime;
-//     lastTime = time;
-//     dropCounter += deltaTime;
-//     // console.log(dropCounter);
-//     if(dropCounter > dropInterval) {
-//         draw();
-//         collision();
-//     }
-
-//     requestAnimationFrame(frame);
-// }
-
-// function loadImage(url) {
-//     return new Promise(resolve => {
-//         const image = new Image();
-//         image.addEventListener('load', () => {
-//             resolve(image);
-//         });
-//         image.src = url;
-//     });
-// }
 
 
 function frame(time = 0){

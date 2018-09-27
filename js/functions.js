@@ -23,11 +23,12 @@ function draw(){
 
 
 function frame(time = 0){
+    requestAnimationFrame(frame);
+
     ctx.clearRect(0, 0, innerWidth, innerHeight);
     draw();
     // collision();
     
-    requestAnimationFrame(frame);
 }
 function init(){
     frame();

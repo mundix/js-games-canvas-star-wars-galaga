@@ -5,7 +5,7 @@ $(function(){
     // mySound.play();
     // mySound = new Sound("");
 
-    var mySound = new Audio('../media/bg/02 Underclocked (underunderclocked mix).mp3');
+    var mySound = new Audio('../media/bg/02-Underclocked.mp3');
     // mySound.volume(10);
     // mySound.play();
     mySound.volume = 0.5;

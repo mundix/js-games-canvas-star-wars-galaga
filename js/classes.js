@@ -13,13 +13,30 @@ class Ship extends Base {
         this.height = height;
         this.image = image;
         this.dy = this.dx = speed * 0.5;
+        this.powerUp = 2;
         // this.shootImage = document.getElementById("shoot-laser");
          
     }
     draw(){
-        if(this.image !== null) 
-            ctx.drawImage(this.image,this.x,this.y,this.width,this.height);
         
+
+        if(this.image !== null) 
+            ctx.drawImage(this.image,this.x,this.y,this.width,this.height,);
+
+            ctx.font = "30px Comic Sans MS";
+            ctx.fillStyle = "white";
+            ctx.textAlign = "left";
+            var x = Math.floor(this.x);
+            var y = Math.floor(this.y);
+            ctx.fillText("x:"+x+",y:"+y+", w:"+this.width+"h:"+this.height, 10 , stageHeight - this.height);  
+        
+    }
+
+    score(){
+        ctx.font = "30px Comic Sans MS";
+            ctx.fillStyle = "white";
+            ctx.textAlign = "right";
+            ctx.fillText("Score: 000000000", stageWidth -10 , this.height); 
     }
 
     isVerticalcollision()
@@ -36,7 +53,7 @@ class Ship extends Base {
     }
 
     move() {
-        
+        this.score();
         // this.y -= this.dy;
         // this.x += this.dx;
 
@@ -50,6 +67,11 @@ class Ship extends Base {
         const shootImage = document.getElementById("shoot-laser");
         const shoot = new Shoot(shootImage,this.x+(this.width/2)-4,this.y,10,29);
         collectionShoots.push(shoot);
+        if(this.powerUp == 2){
+            collectionShoots.push(new Shoot(shootImage,this.x,this.y+10,10,29));
+            collectionShoots.push(new Shoot(shootImage,this.x+this.width-9,this.y+5,10,29));
+        }
+
     }
 }
 
@@ -83,16 +105,19 @@ class Alien extends Base {
                 this.x,this.y,
                 this.height*this.percent,this.height*this.percent);
 
-                // ctx.font = "30px Comic Sans MS";
-                // ctx.fillStyle = "white";
-                // ctx.textAlign = "center";
-                // ctx.fillText("x:"+this.x+",y:"+this.y, this.x, this.y);           
+                ctx.font = "30px Comic Sans MS";
+                ctx.fillStyle = "white";
+                ctx.textAlign = "center";
+                var x = Math.floor(this.x);
+                var y = Math.floor(this.y);
+                ctx.fillText("x:"+x+",y:"+y, 100, 50);        
     }
 
     isVerticalcollision()
     {
-        if( (this.y <= 0 || this.y >= stageHeight-this.height*this.percent) ) 
+        if( (this.y <= 0 || this.y < 0|| this.y >= stageHeight-this.height*this.percent) ) 
             return true;
+
         if(this.y < 0)
             this.y = 10;
         if(this.x > stageWidth)
@@ -147,18 +172,20 @@ class Alien extends Base {
         this.y -= this.dy;
         this.x += this.dx;
 
-        if(this.isVerticalcollision())
+        if(this.isVerticalcollision() )
             this.dy = -this.dy;
         if(this.isHorizontalCollision())
             this.dx = -this.dx;
-            
-            
     }
 
     shoot() {
+        if(this.y < (stageHeight / 2)+100 ) {
         const shootImage = document.getElementById("shoot-misile");
-        const shoot = new Shoot(shootImage,this.x +25,this.y+25,7*5,12*5,"down",0.9);
-        collectionShoots.push(shoot);
+        collectionShoots.push(new Shoot(shootImage,this.x +25,this.y+25,7*5,12*5,"down",0.9));
+        // collectionShoots.push(new Shoot(shootImage,this.x,this.y,7*5,12*5,"down",0.9));
+        // collectionShoots.push(new Shoot(shootImage,this.x+50,this.y,7*5,12*5,"down",0.9));
+    }
+
     }
 }
 

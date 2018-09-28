@@ -1,6 +1,7 @@
 class Base {
-    collission(){
+    collission(obj){
 
+        // if(this.x > obj.x && this.y < this.x + obj.width )
     }
 }
 
@@ -13,7 +14,7 @@ class Ship extends Base {
         this.height = height;
         this.image = image;
         this.dy = this.dx = speed * 0.5;
-        this.powerUp = 2;
+        this.powerUp = 1;
         // this.shootImage = document.getElementById("shoot-laser");
          
     }
@@ -21,7 +22,7 @@ class Ship extends Base {
         
 
         if(this.image !== null) 
-            ctx.drawImage(this.image,this.x,this.y,this.width,this.height,);
+            ctx.drawImage(this.image,this.x,this.y,this.width,this.height);
 
             ctx.font = "30px Comic Sans MS";
             ctx.fillStyle = "white";
@@ -34,9 +35,9 @@ class Ship extends Base {
 
     score(){
         ctx.font = "30px Comic Sans MS";
-            ctx.fillStyle = "white";
-            ctx.textAlign = "right";
-            ctx.fillText("Score: 000000000", stageWidth -10 , this.height); 
+        ctx.fillStyle = "white";
+        ctx.textAlign = "right";
+        ctx.fillText("Score: 000000000", stageWidth -10 , this.height); 
     }
 
     isVerticalcollision()
@@ -64,6 +65,11 @@ class Ship extends Base {
             
     }
     shoot() {
+
+        var mySound = new Audio('../media/fx/shoot-3.wav');
+        mySound.play();
+        mySound.volume = 0.2;
+
         const shootImage = document.getElementById("shoot-laser");
         const shoot = new Shoot(shootImage,this.x+(this.width/2)-4,this.y,10,29);
         collectionShoots.push(shoot);
@@ -153,7 +159,7 @@ class Alien extends Base {
             
             // console.log(this.dy);
             this.transitionTime = 0;
-            if(this.j < 5)
+            if(this.j < 8)
             {
 
                 if(this.growUpTime < 3) {
@@ -219,3 +225,40 @@ class Shoot extends Base {
             this.y += this.dy;
     }
 }
+
+// class Trayectory {
+//     constructor(xStart,yStart,xEnd,yEnd){
+
+//     //     let xs = 0,xe = 100; //xe=> end X position
+//     // let ys = 0,ye = 100; //ys=> end Y position 
+//     // let Dx = xe-xs;
+//     // let Dy = ye-ys;
+//     // let tan = Dx/Dy;
+//     // let atan = Math.atan(tan);
+//     // let angle = Math.atan((xe-xs)/ye-ys) * 180/Math.PI;
+
+//         this.xs = xStart;
+//         this.ys = yStart;
+//         this.xe = xEnd;
+//         this.ye = yEnd;
+//         this.angle = Math.atan((this.xe-this.xs)/(this.ye-this.ys)) * 180/Math.PI;
+//     }
+//     /**
+//      * 
+//      * @param x
+//      * @returns Float 
+//      */
+//     getPositionYbyX(X){
+//         // const AngleRads  = (angle * Math.PI/180);
+//         // y = x/(Math.tan(AngleRads));
+        
+//         const AngleRads  = (this.angle * Math.PI/180);
+//         return this.angle;
+//         return X/(Math.tan(AngleRads));
+//     }
+
+//     getPositionXbyY(Y){
+//         const AngleRads  = (this.angle * Math.PI/180);
+//         return Y*(Math.tan(AngleRads));
+//     }
+// }

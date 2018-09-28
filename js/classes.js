@@ -14,22 +14,20 @@ class Ship extends Base {
         this.height = height;
         this.image = image;
         this.dy = this.dx = speed * 0.5;
-        this.powerUp = 1;
+        this.powerUp = 1 ;
         // this.shootImage = document.getElementById("shoot-laser");
          
     }
     draw(){
-        
-
         if(this.image !== null) 
             ctx.drawImage(this.image,this.x,this.y,this.width,this.height);
 
-            ctx.font = "30px Comic Sans MS";
+            ctx.font = "19px Comic Sans MS";
             ctx.fillStyle = "white";
             ctx.textAlign = "left";
             var x = Math.floor(this.x);
             var y = Math.floor(this.y);
-            ctx.fillText("x:"+x+",y:"+y+", w:"+this.width+"h:"+this.height, 10 , stageHeight - this.height);  
+            ctx.fillText("x:"+x+",y:"+y+", w:"+this.width+"h:"+this.height, 10 , stageHeight -15);  
         
     }
 
@@ -68,7 +66,7 @@ class Ship extends Base {
 
         var mySound = new Audio('../media/fx/shoot-3.wav');
         mySound.play();
-        mySound.volume = 0.2;
+        mySound.volume = 0.1;
 
         const shootImage = document.getElementById("shoot-laser");
         const shoot = new Shoot(shootImage,this.x+(this.width/2)-4,this.y,10,29);
@@ -111,12 +109,12 @@ class Alien extends Base {
                 this.x,this.y,
                 this.height*this.percent,this.height*this.percent);
 
-                ctx.font = "30px Comic Sans MS";
+                ctx.font = "18px Comic Sans MS";
                 ctx.fillStyle = "white";
-                ctx.textAlign = "center";
+                ctx.textAlign = "left";
                 var x = Math.floor(this.x);
                 var y = Math.floor(this.y);
-                ctx.fillText("x:"+x+",y:"+y, 100, 50);        
+                ctx.fillText("x:"+x+",y:"+y, 10, 20);        
     }
 
     isVerticalcollision()
@@ -149,6 +147,8 @@ class Alien extends Base {
                 this.sprite = 0;
             this.shoot();
         }
+        return;
+
 
         if(this.transitionTime < 300){
             this.transitionTime ++;
@@ -185,12 +185,15 @@ class Alien extends Base {
     }
 
     shoot() {
+        const angle = getAngle(this.x,this.y,ship.x,ship.y);
         if(this.y < (stageHeight / 2)+100 ) {
-        const shootImage = document.getElementById("shoot-misile");
-        collectionShoots.push(new Shoot(shootImage,this.x +25,this.y+25,7*5,12*5,"down",0.9));
-        // collectionShoots.push(new Shoot(shootImage,this.x,this.y,7*5,12*5,"down",0.9));
-        // collectionShoots.push(new Shoot(shootImage,this.x+50,this.y,7*5,12*5,"down",0.9));
-    }
+
+            // const  y = trayectoryYbyX(this.x,angle); 
+            const y = this.y;
+            console.log("Angle:",angle,"y:",y);
+            const shootImage = document.getElementById("shoot-misile");
+            collectionShoots.push(new Shoot(shootImage,this.x +25,y,7*5,12*5,"down",0.9));
+        }
 
     }
 }

@@ -1,13 +1,19 @@
+var audio = new Audio('../media/bg/02-Underclocked.mp3');
+const shipImage = document.getElementById("ship");
+const ship = new Ship(shipImage,stageWidth/2,stageHeight/2,40,40);
 
 $(function(){
-    var mySound = new Audio('../media/bg/02-Underclocked.mp3');
-    mySound.play();
-    mySound.volume = 0.3;
+    audio.volume = 0.1;
+    audio.oncanplaythrough = function(){
+        // audio.play();
+    }
+    audio.onended = function(){
+        console.log('ended');
+    }
+    
+    
 
     const alienBossGreenImage = document.getElementById("alien-boss-green-sprite");
-    const shipImage = document.getElementById("ship");
-
-    const ship = new Ship(shipImage,stageWidth/2,stageHeight/2,40,40);
     ship.y = stageHeight -  ship.height - 10; 
 
     

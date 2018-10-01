@@ -4,13 +4,13 @@ body {
     padding: 0px;
 }
 #screen {
-    background: #000;
+    /* background: #000; */
     /* position: relative;; */
     /* border: 1px solid red; */
     /* width: 100%; */
     /* height: auto; */
-    margin: 0;
-    padding: 0px;
+    /* margin: 0; */
+    /* padding: 0px; */
 }
 
 #container {

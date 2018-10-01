@@ -1,32 +1,18 @@
-// $(function(){
-    // init();
-    // var Crafty = require('craftyjs');
-// Crafty("screen");
-Crafty.init(900,900,"screen");
+var canvas = document.getElementById("screen");
+var context = canvas.getContext("2d");
 
-Crafty.background('black');
+canvas.width = 256;
+canvas.height = 256;
 
-// Crafty.e('2D, Canvas, Color, Fourway')
-//   .attr({x: 10, y: 10, w: 30, h: 30})
-//   .color('red')
-//   .fourway(3);
-// });
-var square = Crafty.e('2D, Canvas, Color');
-square.attr({
-  x: 10,
-  y: 10,
-  w: 100,
-  h: 100
-}).color('red');
+context.save(); //Save transformations.
 
-square.origin("center");
+//Translate, rotate.
+context.translate(128,128);
+context.rotate(25*Math.PI/180);
+context.translate(-128,-128);
 
-square.bind('UpdateFrame', function(){
-  this.rotation = this.rotation + 1;
-});
+context.fillRect(64, 64, 128, 128); //Middle square.
 
+context.restore(); //Restore default transformations.
 
-
-
-
-
+context.fillRect(2, 2, 16, 16); //Corner square.

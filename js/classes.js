@@ -1,6 +1,34 @@
 class Base {
-    collission(obj){
+    collission(obj = null){
+        
+        if( (this.y <= (0 + this.height) || (this.y >= innerHeight-this.height)) ) 
+            return true;
+            
+        if(obj !== null)
+        {
 
+            /**     this.x > obj.x && this.x < obj.x + obj.width
+             * 0,0  areaX Between Obj.x and Obj.x + Obj.width
+             * + ----------->
+             * |           | 
+             * |           |  areaY Between Obj.y and Obj.y + Obj.height 
+             * |           |
+             * V           |
+             *  -----------
+             *              x,y
+             *  this.y > obj.y && this.y < obj.y + obj.height
+             */
+            if(
+                
+                ( 
+                    (this.y >= obj.y && this.y <= (obj.y + obj.height))  //Vertical Collision
+                    && 
+                    (this.x >= obj.x && this.x <= (obj.x + obj.width)) )
+                )
+                return true;
+        }
+
+        return false;
         // if(this.x > obj.x && this.y < this.x + obj.width )
     }
 }
@@ -69,6 +97,7 @@ class Ship extends Base {
         mySound.volume = 0.1;
 
         const shootImage = document.getElementById("shoot-laser");
+        // const shoot = new Shoot(shootImage,this.x+(this.width/2)-4,this.y,10,29);
         const shoot = new Shoot(shootImage,this.x+(this.width/2)-4,this.y,10,29);
         collectionShoots.push(shoot);
         if(this.powerUp == 2){
@@ -86,7 +115,7 @@ class Alien extends Base {
         this.transition = (randomNumber>=5)?5:randomNumber; //transition speed
         this.x = x;
         this.y = y;
-        this.width = width;
+        this.width = width/2-10;
         this.height = height;
         this.image = image;
         this.dy = this.dx = speed * this.transition;
@@ -107,6 +136,7 @@ class Alien extends Base {
                 this.sprites[this.sprite],0,
                 this.sprites[this.sprites.length-1],this.height,
                 this.x,this.y,
+                // this.height,this.height);
                 this.height*this.percent,this.height*this.percent);
 
                 ctx.font = "18px Comic Sans MS";
@@ -114,7 +144,8 @@ class Alien extends Base {
                 ctx.textAlign = "left";
                 var x = Math.floor(this.x);
                 var y = Math.floor(this.y);
-                ctx.fillText("x:"+x+",y:"+y, 10, 20);        
+                // ctx.fillText("x:"+x+",y:"+y, 10, 20);  
+                ctx.fillText(`x: ${this.x} w: ${this.width} y: ${this.h} h: ${this.height}`, 10, 20);        
     }
 
     isVerticalcollision()
@@ -136,6 +167,7 @@ class Alien extends Base {
     }
 
     move(time = 0) {
+        // return;
         if(this.counter < 30)
         {
             this.counter ++;
@@ -147,7 +179,7 @@ class Alien extends Base {
                 this.sprite = 0;
             this.shoot();
         }
-        return;
+        // return;
 
 
         if(this.transitionTime < 300){
@@ -171,7 +203,7 @@ class Alien extends Base {
                     this.j ++;
                 }
             }
-        // this.shoot(); 
+        this.shoot(); 
 
         }
         
@@ -185,12 +217,13 @@ class Alien extends Base {
     }
 
     shoot() {
-        const angle = getAngle(this.x,this.y,ship.x,ship.y);
+        console.log("Shot");
+        // const angle = getAngle(this.x,this.y,ship.x,ship.y);
         if(this.y < (stageHeight / 2)+100 ) {
 
             // const  y = trayectoryYbyX(this.x,angle); 
             const y = this.y;
-            console.log("Angle:",angle,"y:",y);
+            // console.log("Angle:",angle,"y:",y);
             const shootImage = document.getElementById("shoot-misile");
             collectionShoots.push(new Shoot(shootImage,this.x +25,y,7*5,12*5,"down",0.9));
         }
@@ -208,24 +241,44 @@ class Shoot extends Base {
         this.image = image;
         this.dy = this.dx = speed * speedPercent;
         this.direction = direction;
+        this.stop = false;
     }
     draw(){
         // if(this.image !== null) 
             ctx.drawImage(this.image,this.x,this.y,this.width,this.height);
     }
 
-    collision()
-    {
-        if( (this.y <= (0 + this.height) || (this.y >= innerHeight-this.height)) ) 
-            return true;
-        return false;
-    }
+    // collision()
+    // {
+        
+    // }
 
     move() {
         if(this.direction == "up")
             this.y -= this.dy;
         else if(this.direction == "down")
             this.y += this.dy;
+            //  console.log(this.x,this.y);
+           
+
+            // console.log(this.x,this.y);
+    }
+}
+class Rectangle extends Base {
+    constructor(x,y,w,h) {
+        super();
+        this.x =x ;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+    }
+    draw(){
+        ctx.fillStyle = "red";
+        ctx.fillRect(this.x,this.y,this.w,this.h);
+        
+    }
+    move(){
+
     }
 }
 

@@ -15,39 +15,7 @@ $(function(){
 
     const alienBossGreenImage = document.getElementById("alien-boss-green-sprite");
     ship.y = stageHeight -  ship.height - 10; 
-
-    
-   
-    // animated();
-
-    // ctx.drawImage(shipImage,100,100,100,100);
-    // ctx.save();
-    // ctx.translate( 100, 100 );
-    // ctx.rotate( 45*Math.PI/180 );
-    // ctx.translate( 100, 100 );
-    // ctx.drawImage(shipImage,-100,-100,100,100);
-    // ctx.restore();
-    
-    // ctx.save();
-    // ctx.translate( 100, 100 );
-    // ctx.rotate( 30*Math.PI/180 );
-    // ctx.translate( 100, 100 );
-    // ctx.drawImage(shipImage,-100,-100,100,100);
-    // ctx.restore();
-
-    // ctx.save();
-    // ctx.translate( 100, 100 );
-    // ctx.rotate( 60*Math.PI/180 );
-    // ctx.translate( 100, 100 );
-    // ctx.drawImage(shipImage,-100,-100,100,100);
-    // ctx.restore();
-
-    // ctx.save();
-    // ctx.translate( 100, 100 );
-    // ctx.rotate( 90*Math.PI/180 );
-    // ctx.translate( 100, 100 );
-    // ctx.drawImage(shipImage,-100,-100,100,100);
-    // ctx.restore();
+    console.log(ship.constructor.name);
 
     const alien = new Alien(alienBossGreenImage,
         stageWidth/2 ,
@@ -55,8 +23,11 @@ $(function(){
         alienBossGreenImage.width,
         alienBossGreenImage.height
         );
+        
+        console.log(alienBossGreenImage.width);
 
-    collection.push(ship); 
+    collection.push(ship);
+    collection.push(new Rectangle(alien.x,alien.y,alien.width,alien.height)); 
     collection.push(alien);
 
     init();
@@ -89,39 +60,5 @@ $(function(){
     });
 
 });
-var dx = 4;
-let x = y =stageHeight;
-// let x = 0;
-let angle = 50;
-angle = getAngle(10,20,x,y);
-x = 50;
-console.log(angle);
-// const trayectory = {x:100,y:100};
 
-
-
-function animated()
-{
-    ctx.clearRect(0, 0, stageWidth, stageHeight);
-    y = trayectoryYbyX(x,angle);
-    ctx.save();
-    ctx.beginPath();
-    ctx.fillStyle='red';
-    ctx.arc(x,y,30,0,2*Math.PI);
-    ctx.fill();
-    ctx.stroke();
-    ctx.restore();
-
-    ctx.font = "30px Comic Sans MS";
-    ctx.fillStyle = "white";
-    ctx.textAlign = "right";
-    ctx.fillText("x:"+x+" y:"+y, stageWidth, 50); 
-
-    if( x > stageWidth || x < 0)
-        dx = -dx;
-
-    x += dx;
-
-    requestAnimationFrame(animated);
-}
 

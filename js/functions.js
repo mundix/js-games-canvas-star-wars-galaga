@@ -1,5 +1,27 @@
 function collision() {
+    //Shoot Hit Objects
+    collectionShoots.forEach((shoot,key)=>{
+        collection.forEach((obj,index) => {
+            if(shoot.collission(obj)){
 
+                collectionShoots[key] = null;
+                delete collectionShoots[key];
+                // console.log(obj.constructor.name);
+                if(obj.constructor.name == "Ship")
+                {
+                    c.style.backgroundColor = "#bf9595";
+                    setInterval(() =>{
+                    // brick.destroy(brickKey,"brick");
+                        c.style.backgroundColor = "black";
+                    },100);
+                }
+                if(obj.constructor.name == "Alien"){
+                    
+                }
+
+            }
+        });
+    });
 }
 function draw(){
     collection.forEach((obj,key) => {
@@ -10,7 +32,7 @@ function draw(){
         // obj.shoot();
         obj.draw(); 
         obj.move();
-        if(obj.collision()){
+        if(obj.collission()){
             collectionShoots[key] = null;
             delete collectionShoots[key];
         }

@@ -4,8 +4,8 @@ body {
     padding: 0px;
 }
 #screen {
-    /* background: #000; */
-    /* position: relative;; */
+    background: #000;
+    position: relative;;
     /* border: 1px solid red; */
     /* width: 100%; */
     /* height: auto; */
@@ -19,5 +19,5 @@ body {
     /* padding: 0px !important; */
 }
 #assets {
-    display: none;
+    /* display: none; */
 }
